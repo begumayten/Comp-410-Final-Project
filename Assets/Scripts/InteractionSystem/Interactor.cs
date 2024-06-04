@@ -12,6 +12,9 @@ public class Interactor : MonoBehaviour
     private readonly Collider[] colliders = new Collider[3];
     [SerializeField] private int numFound;
 
+
+
+
     private void Update()
     {
         numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, _interactionPointRadius, colliders, _interactableMask);
