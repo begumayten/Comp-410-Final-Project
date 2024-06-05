@@ -9,7 +9,6 @@ public class ControlText : MonoBehaviour
     [SerializeField] private GameObject[] Runes;
     [SerializeField] private float displayDuration = 3f; // Duration to display the text
 
-
     void Start()
     {
         // Set indexes for each RuneStone
@@ -49,11 +48,12 @@ public class ControlText : MonoBehaviour
                 text.text = "A hero emerged from the shadows, seeking to restore the kingdom's glory. With unwavering resolve, the hero ventured into the heart of the darkness, but their fate remains unknown. Some say the hero's spirit still wanders these woods, guarding the secrets of the past.";
                 break;
             case 4:
-                text.text = "You have come far, traveler. The hero's spirit guides you now. The darkness that once threatened this land was not destroyed, only dormant. Your journey is to awaken the light within and dispel the shadows forever. You are the chosen one to complete what the hero began.";  
-                    break;
+                text.text = "You have come far, traveler. The hero's spirit guides you now. The darkness that once threatened this land was not destroyed, only dormant. Your journey is to awaken the light within and dispel the shadows forever. You are the chosen one to complete what the hero began.";
+                break;
             case 5:
-                text.text = "The time has come. With each step you have taken, the light within you has grown stronger. Now, stand tall and let the light guide you. The kingdom's future rests in your hands. Remember, the darkness can only thrive if we forget the light. Go forth and restore the realm to its former glory.";        
-                    break;
+                text.text = "The time has come. With each step you have taken, the light within you has grown stronger. Now, stand tall and let the light guide you. The kingdom's future rests in your hands. Remember, the darkness can only thrive if we forget the light. Go forth and restore the realm to its former glory.";
+                StartCoroutine(DisplayAdditionalTextAfterDelay("Congratulations! You have restored the light and brought peace to the kingdom. Your journey has ended, but the story of the realm will live on through your actions. Thank you for playing.", 5f)); // Display additional text after 5 seconds
+                break;
             default:
                 text.text = "Unknown Rune";
                 break;
@@ -62,9 +62,17 @@ public class ControlText : MonoBehaviour
         StartCoroutine(ClearTextAfterDelay(displayDuration));
     }
 
+    private IEnumerator DisplayAdditionalTextAfterDelay(string additionalText, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        text.text = additionalText;
+        StartCoroutine(ClearTextAfterDelay(displayDuration)); // Clear the text after displayDuration seconds
+    }
+
     private IEnumerator ClearTextAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         text.text = ""; // Clear the text
     }
+
 }
